@@ -100,6 +100,8 @@ void selection (int * tab, int n){
     }
 }
 
+int partitionner(int * Tab, int deb, int fin);
+
 // tri rapide
 void trier(int* Tab, int deb, int fin){
     if (deb < fin) {
