@@ -43,6 +43,24 @@ void freetab(int * tab, int n){
     fclose(fichier);
 }
 
+//tri a bulle
+void triBulles(int * tab, int n){
+  if(n > 1){
+    int i;
+    int temp;
+    for(i=0;i<=n-1;i++){
+      if(tab[i] > tab[i+1]){
+        temp = tab[i];
+        tab[i] = tab[i+1];
+        tab[i+1] = temp;
+      }
+    }
+    triBulles(tab,n-1);
+  }
+}
+
+
+/*
 //tri insertion
 void insertion(int * tab, int n)
 {
@@ -54,6 +72,8 @@ void insertion(int * tab, int n)
        tab[j] = elem;
    }
 }
+*/
+
 
 //tri selection
 void selection (int * tab, int n){
@@ -168,7 +188,7 @@ int main(){
     clock_t start,end; //initialisation horloge
     int deb, fin;
     int k;
-    printf("Quel algorithme de tri voulez vous utiliser  ?\n\n");
+    /*printf("Quel algorithme de tri voulez vous utiliser  ?\n\n");
     printf("Tri rapide (1)\nTri selection (2)\nTri fusion (3)\nTri insertion (4)\n \n");
     scanf("%d",&k);
 
@@ -250,6 +270,6 @@ int main(){
                 n = n + 50000;
             }
 
-    }
+    }*/
     return 0;
 }
