@@ -27,8 +27,8 @@ void afftab(int* tab, int n){
 
 //Liberation mémoire
 void freetab(int * tab, int n){
-    if (n != 0) {
-        free(tab);
+    if (n != 0){
+      free(tab);
     }
 }
 
@@ -77,58 +77,54 @@ void insertion(int * tab, int n)
 
 //tri selection
 void selection (int * tab, int n){
-    int i;
-    int j;
-    int max;
-    int temp;
-    i = n - 1 ;
+  int i;
+  int j;
+  int max;
+  int temp;
+  i = n - 1;
 
-    while (i>0)
-    {
-        max = 0;
-        for(j=0;j<=i;j++)
-        {
-            if (tab[j] > tab[max])
-            {
-                max = j;
-            }
-        }
-        temp = tab[max];
-        tab[max] = tab[i];
-        tab[i] = temp;
-        i = i - 1;
+  while (i>0){
+    max = 0;
+    for(j=0;j<=i;j++){
+      if (tab[j] > tab[max]){
+        max = j;
+      }
     }
+    temp = tab[max];
+    tab[max] = tab[i];
+    tab[i] = temp;
+    i = i - 1;
+  }
 }
 
 int partitionner(int * Tab, int deb, int fin);
 
 // tri rapide
 void trier(int* Tab, int deb, int fin){
-    if (deb < fin) {
-        int pivot = partitionner(Tab, deb, fin);
+  if (deb < fin){
+    int pivot = partitionner(Tab, deb, fin);
 
-        trier(Tab, deb, pivot-1);
-        trier(Tab, pivot+1, fin);
-    }
+    trier(Tab, deb, pivot-1);
+    trier(Tab, pivot+1, fin);
+  }
 }
 int partitionner(int * Tab, int deb, int fin){
-    int i, j, temp;
-    j = deb;
+  int i, j, temp;
+  j = deb;
 
-    for (i=deb; i<=fin; i++) {
-        if (Tab[i] < Tab[j]) {
-            if (i != j+1) {
-                temp = Tab[j+1];
-                Tab[j+1] = Tab[i];
-                Tab[i] = temp;
-            }
-            temp = Tab[j];
-            Tab[j] = Tab[j+1];
-            Tab[j+1] = temp;
-            j = j + 1;
-        }
+  for (i=deb; i<=fin; i++){
+    if (Tab[i] < Tab[j]){
+      if (i != j+1){
+        temp = Tab[j+1];
+        Tab[j+1] = Tab[i];
+        Tab[i] = temp;
+      }
+      temp = Tab[j];
+      Tab[j] = Tab[j+1];
+      Tab[j+1] = temp;
+      j = j + 1;
     }
-
+  }
     return (j);
 }
 
