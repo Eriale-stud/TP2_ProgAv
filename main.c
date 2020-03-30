@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 10000
+#define MAX 10000000
 
 
 // création d'un tableau d'entier aléatoire
@@ -29,7 +29,7 @@ void copytab(int * tab, int * tabbis, int n){ //set up le malloc de tabbis et le
   int i;
   /*tabbis = calloc(n, sizeof(int));*/
   for(i=0;i<=n-1;i++){
-    tabbis[i] = tab[i];  
+    tabbis[i] = tab[i];
   }
 }
 //Liberation mémoire
@@ -55,11 +55,15 @@ void triBulles(int * tab, int n){
   if(n > 1){
     int i;
     int temp;
-    for(i=0;i<=n-1;i++){
+    for(i=0;i<=n-2;i++){
       if(tab[i] > tab[i+1]){
         temp = tab[i];
         tab[i] = tab[i+1];
         tab[i+1] = temp;
+        /*if(n == 100000){
+            system("cls");
+            printf("en cours ...");
+        }*/
       }
     }
     triBulles(tab,n-1);
@@ -99,6 +103,7 @@ void trier(int* Tab, int deb, int fin){
     trier(Tab, pivot+1, fin);
   }
 }
+
 int partitionner(int * Tab, int deb, int fin){
   int i, j, temp;
   j = deb;
@@ -184,19 +189,18 @@ int main(){
   printf("Je voudrai utiliser le tri numero : ");
   scanf("%d",&k);
   printf("\n");*/
-  int * tabOrigine = calloc(1000000, sizeof(int));
+  int * tabOrigine = calloc(40000, sizeof(int));
   int * tab;
   int * tab1;
   int * tab2;
   int * tab3;
-  printf("It is OK !");
 
-  while(n < 100000){
-
+  while(n <= 40000){
+    //printf("n est egal a %d !\n\n",n);
     k = 1;
 
     // tri rapide
-    if (k == 1 && n <= 500000){
+    if (k == 1){
       deb = 0;
       fin = n-1;
       int * tab = calloc(n, sizeof(int));
@@ -209,8 +213,8 @@ int main(){
       printf("        La taille du tableau est : %d\n\n",n);
       printf("        Le temps d'execution du tri rapide est    :    %f\n\n", (float)(end-start)/CLOCKS_PER_SEC);
       float f = (float)(end-start)/CLOCKS_PER_SEC;
-      afftab(tab,n);
-      //Ecritfiche(f);
+      //afftab(tab,n);
+      Ecritfiche(f);
       freetab(tab,n);
       k++;
     }
@@ -227,14 +231,14 @@ int main(){
       printf("        La taille du tableau est : %d\n\n",n);
       printf("        Le temps d'execution du tri selection est    :    %f\n\n",(float)(end-start)/CLOCKS_PER_SEC);
       float f = (float)(end-start)/CLOCKS_PER_SEC;
-      afftab(tab1,n);
-      //Ecritfiche(f);
+      //afftab(tab1,n);
+      Ecritfiche(f);
       freetab(tab1,n);
       k++;
     }
 
     //tri fusion
-    if (k == 3 && n <= 500000){
+    if (k == 3){
       int * tab2 = calloc(n,sizeof(int));
       copytab(tabOrigine,tab2,n);
       genTab(tab2,n);
@@ -245,8 +249,8 @@ int main(){
       printf("        La taille du tableau est : %d\n\n",n);
       printf("        Le temps d'execution du tri fusion est     :     %f\n\n",(float)(end-start)/CLOCKS_PER_SEC);
       float f = (float)(end-start)/CLOCKS_PER_SEC;
-      //Ecritfiche(f);
-      afftab(tab2,n);
+      Ecritfiche(f);
+      //afftab(tab2,n);
       freetab(tab2,n);
       k++;
     }
@@ -261,18 +265,20 @@ int main(){
       end = clock();
       printf("\n\nTRI A BULLE\n");
       printf("        La taille du tableau est : %d\n\n",n);
-      printf("        Le temps d'execution du tri a bulle est   :   %f\n\n",(float)(end-start)/CLOCKS_PER_SEC);
+      printf("        Le temps d'execution du tri a bulle est   :     %f\n\n",(float)(end-start)/CLOCKS_PER_SEC);
       float f = (float)(end-start)/CLOCKS_PER_SEC;
-      //Ecritfiche(f);
-      afftab(tab3,n);
+      Ecritfiche(f);
+      //afftab(tab3,n);
       freetab(tab3,n);
     }
-    if (n < 100000){
-      //n = n *10 ;
-      n++;
+
+
+
+    if (n < 10000){
+      n = n *10 ;
     }
     else{
-      n = n + 50000;
+      n = n + 5000;
     }
   }
   freetab(tabOrigine,n);
